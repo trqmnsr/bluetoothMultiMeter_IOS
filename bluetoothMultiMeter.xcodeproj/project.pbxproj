@@ -8,28 +8,41 @@
 
 /* Begin PBXBuildFile section */
 		541A7D94280D3EA80048F3D1 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541A7D93280D3EA80048F3D1 /* DataSource.swift */; };
+		541A7D9D280E8A0C0048F3D1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541A7D9C280E8A0C0048F3D1 /* CoreBluetooth.framework */; };
+		541A7DA2280F00680048F3D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541A7DA1280F00680048F3D1 /* Constants.swift */; };
+		5433FBB22813DF4F00A7B541 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBB12813DF4F00A7B541 /* DetailsView.swift */; };
+		5433FBB62813E48F00A7B541 /* DataSourceGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBB52813E48F00A7B541 /* DataSourceGenerator.swift */; };
+		5433FBB82814014E00A7B541 /* DetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBB72814014E00A7B541 /* DetailCellView.swift */; };
+		5433FBBA2814BF3300A7B541 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBB92814BF3300A7B541 /* TestView.swift */; };
+		5433FBBF2814FDA600A7B541 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBBE2814FDA600A7B541 /* DataView.swift */; };
+		5433FBCC28152F4700A7B541 /* PeripheralRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBCB28152F4700A7B541 /* PeripheralRow.swift */; };
+		5433FBCE28153AC900A7B541 /* RSSIAntena.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBCD28153AC900A7B541 /* RSSIAntena.swift */; };
+		5433FBD228167AF000A7B541 /* RssiStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBD128167AF000A7B541 /* RssiStrength.swift */; };
+		546A8C1E2811ABE000DAEE2C /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A8C1B2811ABE000DAEE2C /* BluetoothManager.swift */; };
+		546A8C232811AC4100DAEE2C /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A8C222811AC4100DAEE2C /* ScannerView.swift */; };
+		54ABF58D280F46E8004A0219 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ABF58C280F46E8004A0219 /* NavigationView.swift */; };
 		54F3AE8628091E6B00602134 /* bluetoothMultiMeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3AE8528091E6B00602134 /* bluetoothMultiMeterApp.swift */; };
-		54F3AE8828091E6B00602134 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3AE8728091E6B00602134 /* ContentView.swift */; };
+		54F3AE8828091E6B00602134 /* ChartLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3AE8728091E6B00602134 /* ChartLayout.swift */; };
 		54F3AE8A28091E6D00602134 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F3AE8928091E6D00602134 /* Assets.xcassets */; };
 		54F3AE8D28091E6D00602134 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F3AE8C28091E6D00602134 /* Preview Assets.xcassets */; };
-		54F3AE9D28091EFA00602134 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F3AE9928091ECB00602134 /* Charts.framework */; platformFilter = ios; };
-		54F3AE9E28091EFA00602134 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54F3AE9928091ECB00602134 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		54F3AEA228091F3800602134 /* TestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3AEA128091F3800602134 /* TestDataSource.swift */; };
-		54F3AEA428091F4B00602134 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3AEA328091F4B00602134 /* LineChartView.swift */; };
-		54F3AEA62809283000602134 /* RandomDataPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3AEA52809283000602134 /* RandomDataPoints.swift */; };
+		54F3AEA428091F4B00602134 /* LineChartElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3AEA328091F4B00602134 /* LineChartElement.swift */; };
+		54F655302817C8A600554B11 /* Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6552F2817C8A600554B11 /* Peripheral.swift */; };
+		54F655342817EBEE00554B11 /* ConnectedPeripheralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F655332817EBEE00554B11 /* ConnectedPeripheralView.swift */; };
+		54F6554228193B6000554B11 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F6553F28193B4200554B11 /* Charts.framework */; platformFilter = ios; };
+		54F6554328193B6000554B11 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54F6553F28193B4200554B11 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		54F3AE9828091ECB00602134 /* PBXContainerItemProxy */ = {
+		54F6553E28193B4200554B11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 54F3AE9328091ECB00602134 /* Charts.xcodeproj */;
+			containerPortal = 54F6553928193B4100554B11 /* Charts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
 			remoteInfo = Charts;
 		};
-		54F3AE9A28091ECB00602134 /* PBXContainerItemProxy */ = {
+		54F6554028193B4200554B11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 54F3AE9328091ECB00602134 /* Charts.xcodeproj */;
+			containerPortal = 54F6553928193B4100554B11 /* Charts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
 			remoteInfo = ChartsTests;
@@ -37,13 +50,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		54F3AE9F28091EFA00602134 /* Embed Frameworks */ = {
+		54F6554428193B6000554B11 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				54F3AE9E28091EFA00602134 /* Charts.framework in Embed Frameworks */,
+				54F6554328193B6000554B11 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,15 +65,28 @@
 
 /* Begin PBXFileReference section */
 		541A7D93280D3EA80048F3D1 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		541A7D9C280E8A0C0048F3D1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		541A7DA1280F00680048F3D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5433FBB12813DF4F00A7B541 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		5433FBB52813E48F00A7B541 /* DataSourceGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceGenerator.swift; sourceTree = "<group>"; };
+		5433FBB72814014E00A7B541 /* DetailCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellView.swift; sourceTree = "<group>"; };
+		5433FBB92814BF3300A7B541 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		5433FBBE2814FDA600A7B541 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
+		5433FBCB28152F4700A7B541 /* PeripheralRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralRow.swift; sourceTree = "<group>"; };
+		5433FBCD28153AC900A7B541 /* RSSIAntena.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSIAntena.swift; sourceTree = "<group>"; };
+		5433FBD128167AF000A7B541 /* RssiStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssiStrength.swift; sourceTree = "<group>"; };
+		546A8C1B2811ABE000DAEE2C /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BluetoothManager.swift; path = ../../../BluetoothLearn/BluetoothLearn/BluetoothManager.swift; sourceTree = "<group>"; };
+		546A8C222811AC4100DAEE2C /* ScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		54ABF58C280F46E8004A0219 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		54F3AE8228091E6B00602134 /* bluetoothMultiMeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bluetoothMultiMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F3AE8528091E6B00602134 /* bluetoothMultiMeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bluetoothMultiMeterApp.swift; sourceTree = "<group>"; };
-		54F3AE8728091E6B00602134 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		54F3AE8728091E6B00602134 /* ChartLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLayout.swift; sourceTree = "<group>"; };
 		54F3AE8928091E6D00602134 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F3AE8C28091E6D00602134 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		54F3AE9328091ECB00602134 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../Downloads/Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
-		54F3AEA128091F3800602134 /* TestDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDataSource.swift; sourceTree = "<group>"; };
-		54F3AEA328091F4B00602134 /* LineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
-		54F3AEA52809283000602134 /* RandomDataPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDataPoints.swift; sourceTree = "<group>"; };
+		54F3AEA328091F4B00602134 /* LineChartElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartElement.swift; sourceTree = "<group>"; };
+		54F6552F2817C8A600554B11 /* Peripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peripheral.swift; sourceTree = "<group>"; };
+		54F655332817EBEE00554B11 /* ConnectedPeripheralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedPeripheralView.swift; sourceTree = "<group>"; };
+		54F6553928193B4100554B11 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,17 +94,85 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54F3AE9D28091EFA00602134 /* Charts.framework in Frameworks */,
+				541A7D9D280E8A0C0048F3D1 /* CoreBluetooth.framework in Frameworks */,
+				54F6554228193B6000554B11 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		541A7DA3280F011D0048F3D1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5433FBBD2814FA9E00A7B541 /* DataViews */,
+				5433FBBC2814FA8B00A7B541 /* ConnectionViews */,
+				5433FBBB2814FA7900A7B541 /* LiveViews */,
+				54ABF590280F4C43004A0219 /* Elements */,
+				54ABF58C280F46E8004A0219 /* NavigationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5433FBBB2814FA7900A7B541 /* LiveViews */ = {
+			isa = PBXGroup;
+			children = (
+				54F3AE8728091E6B00602134 /* ChartLayout.swift */,
+				5433FBB12813DF4F00A7B541 /* DetailsView.swift */,
+				54F3AEA328091F4B00602134 /* LineChartElement.swift */,
+				5433FBB72814014E00A7B541 /* DetailCellView.swift */,
+			);
+			path = LiveViews;
+			sourceTree = "<group>";
+		};
+		5433FBBC2814FA8B00A7B541 /* ConnectionViews */ = {
+			isa = PBXGroup;
+			children = (
+				546A8C222811AC4100DAEE2C /* ScannerView.swift */,
+				5433FBCB28152F4700A7B541 /* PeripheralRow.swift */,
+				5433FBCD28153AC900A7B541 /* RSSIAntena.swift */,
+				54F655332817EBEE00554B11 /* ConnectedPeripheralView.swift */,
+			);
+			path = ConnectionViews;
+			sourceTree = "<group>";
+		};
+		5433FBBD2814FA9E00A7B541 /* DataViews */ = {
+			isa = PBXGroup;
+			children = (
+				5433FBBE2814FDA600A7B541 /* DataView.swift */,
+			);
+			path = DataViews;
+			sourceTree = "<group>";
+		};
+		546A8C1F2811AC2200DAEE2C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5433FBD128167AF000A7B541 /* RssiStrength.swift */,
+				54F6552F2817C8A600554B11 /* Peripheral.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		546A8C242811ED7A00DAEE2C /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				54F6553928193B4100554B11 /* Charts.xcodeproj */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		54ABF590280F4C43004A0219 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				5433FBB92814BF3300A7B541 /* TestView.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
 		54F3AE7928091E6B00602134 = {
 			isa = PBXGroup;
 			children = (
-				54F3AE9328091ECB00602134 /* Charts.xcodeproj */,
+				546A8C242811ED7A00DAEE2C /* Packages */,
 				54F3AE8428091E6B00602134 /* bluetoothMultiMeter */,
 				54F3AE8328091E6B00602134 /* Products */,
 				54F3AE9C28091EFA00602134 /* Frameworks */,
@@ -97,9 +191,9 @@
 			isa = PBXGroup;
 			children = (
 				54F3AEA028091F3800602134 /* DataSource */,
+				546A8C1F2811AC2200DAEE2C /* Models */,
+				541A7DA3280F011D0048F3D1 /* Views */,
 				54F3AE8528091E6B00602134 /* bluetoothMultiMeterApp.swift */,
-				54F3AEA328091F4B00602134 /* LineChartView.swift */,
-				54F3AE8728091E6B00602134 /* ContentView.swift */,
 				54F3AE8928091E6D00602134 /* Assets.xcassets */,
 				54F3AE8B28091E6D00602134 /* Preview Content */,
 			);
@@ -114,18 +208,10 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		54F3AE9428091ECB00602134 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				54F3AE9928091ECB00602134 /* Charts.framework */,
-				54F3AE9B28091ECB00602134 /* ChartsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		54F3AE9C28091EFA00602134 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				541A7D9C280E8A0C0048F3D1 /* CoreBluetooth.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -133,11 +219,21 @@
 		54F3AEA028091F3800602134 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				54F3AEA128091F3800602134 /* TestDataSource.swift */,
-				54F3AEA52809283000602134 /* RandomDataPoints.swift */,
+				546A8C1B2811ABE000DAEE2C /* BluetoothManager.swift */,
 				541A7D93280D3EA80048F3D1 /* DataSource.swift */,
+				541A7DA1280F00680048F3D1 /* Constants.swift */,
+				5433FBB52813E48F00A7B541 /* DataSourceGenerator.swift */,
 			);
 			path = DataSource;
+			sourceTree = "<group>";
+		};
+		54F6553A28193B4100554B11 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54F6553F28193B4200554B11 /* Charts.framework */,
+				54F6554128193B4200554B11 /* ChartsTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,13 +246,15 @@
 				54F3AE7E28091E6B00602134 /* Sources */,
 				54F3AE7F28091E6B00602134 /* Frameworks */,
 				54F3AE8028091E6B00602134 /* Resources */,
-				54F3AE9F28091EFA00602134 /* Embed Frameworks */,
+				54F6554428193B6000554B11 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = bluetoothMultiMeter;
+			packageProductDependencies = (
+			);
 			productName = bluetoothMultiMeter;
 			productReference = 54F3AE8228091E6B00602134 /* bluetoothMultiMeter.app */;
 			productType = "com.apple.product-type.application";
@@ -189,8 +287,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 54F3AE9428091ECB00602134 /* Products */;
-					ProjectRef = 54F3AE9328091ECB00602134 /* Charts.xcodeproj */;
+					ProductGroup = 54F6553A28193B4100554B11 /* Products */;
+					ProjectRef = 54F6553928193B4100554B11 /* Charts.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -201,18 +299,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		54F3AE9928091ECB00602134 /* Charts.framework */ = {
+		54F6553F28193B4200554B11 /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Charts.framework;
-			remoteRef = 54F3AE9828091ECB00602134 /* PBXContainerItemProxy */;
+			remoteRef = 54F6553E28193B4200554B11 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		54F3AE9B28091ECB00602134 /* ChartsTests.xctest */ = {
+		54F6554128193B4200554B11 /* ChartsTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ChartsTests.xctest;
-			remoteRef = 54F3AE9A28091ECB00602134 /* PBXContainerItemProxy */;
+			remoteRef = 54F6554028193B4200554B11 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -234,12 +332,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54F3AEA62809283000602134 /* RandomDataPoints.swift in Sources */,
-				54F3AE8828091E6B00602134 /* ContentView.swift in Sources */,
+				5433FBBA2814BF3300A7B541 /* TestView.swift in Sources */,
+				54ABF58D280F46E8004A0219 /* NavigationView.swift in Sources */,
+				5433FBCE28153AC900A7B541 /* RSSIAntena.swift in Sources */,
+				5433FBB82814014E00A7B541 /* DetailCellView.swift in Sources */,
+				5433FBB62813E48F00A7B541 /* DataSourceGenerator.swift in Sources */,
+				54F3AE8828091E6B00602134 /* ChartLayout.swift in Sources */,
 				541A7D94280D3EA80048F3D1 /* DataSource.swift in Sources */,
+				5433FBB22813DF4F00A7B541 /* DetailsView.swift in Sources */,
+				54F655302817C8A600554B11 /* Peripheral.swift in Sources */,
 				54F3AE8628091E6B00602134 /* bluetoothMultiMeterApp.swift in Sources */,
-				54F3AEA228091F3800602134 /* TestDataSource.swift in Sources */,
-				54F3AEA428091F4B00602134 /* LineChartView.swift in Sources */,
+				5433FBCC28152F4700A7B541 /* PeripheralRow.swift in Sources */,
+				54F3AEA428091F4B00602134 /* LineChartElement.swift in Sources */,
+				5433FBBF2814FDA600A7B541 /* DataView.swift in Sources */,
+				541A7DA2280F00680048F3D1 /* Constants.swift in Sources */,
+				5433FBD228167AF000A7B541 /* RssiStrength.swift in Sources */,
+				546A8C1E2811ABE000DAEE2C /* BluetoothManager.swift in Sources */,
+				54F655342817EBEE00554B11 /* ConnectedPeripheralView.swift in Sources */,
+				546A8C232811AC4100DAEE2C /* ScannerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,8 +478,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bluetoothMultiMeter/Preview Content\"";
+				DEVELOPMENT_TEAM = DG9XQWC8LH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = bluetoothMultiMeter/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Required to connect to Bluetooth Deveices";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Required to connect to Bluetooth Deveices";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -396,8 +512,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bluetoothMultiMeter/Preview Content\"";
+				DEVELOPMENT_TEAM = DG9XQWC8LH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = bluetoothMultiMeter/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Required to connect to Bluetooth Deveices";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Required to connect to Bluetooth Deveices";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

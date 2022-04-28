@@ -15,8 +15,18 @@ class DataSource: ObservableObject {
     
     @Published var dataPoints: [ChartDataEntry]
     
+    var max_value: Double {
+        dataPoints.max(by: {a,b in a.y>b.y})?.y ?? 0
+    }
+    
+    var min_value: Double {
+        dataPoints.max(by: {a,b in a.y>b.y})?.y ?? 0
+    }
+    
+    
+    
     init() {
-        dataPoints = [ChartDataEntry(x:0.00, y: 0.0)]
+        dataPoints = []
     }
     
 }
@@ -55,8 +65,11 @@ class StaticDataSource: DataSource {
 
     override init() {
         super.init()
-        for x_value in stride(from: 0.0, to: 30.0, by: 0.2) {
-            self.dataPoints.append(ChartDataEntry(x:x_value, y: Double.random(in: (-5...5))))
+        var currentvalue = 25.0
+        for x_value in stride(from: 0.0, to: 30.0, by: 0.5) {
+            let r = Double.random(in: (-1.0...1.0))
+            currentvalue += r
+            self.dataPoints.append(ChartDataEntry(x:x_value, y: currentvalue))
         }
     }
 }
