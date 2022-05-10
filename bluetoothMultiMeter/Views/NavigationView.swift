@@ -9,24 +9,37 @@ import SwiftUI
 
 struct NavigationView: View {
     
-    
-    @StateObject var manager = BluetoothManager(data: DataSourceGenerator())
+    @StateObject var manager = BluetoothManager()
+    @State private var selection = 1
     
     var body: some View {
-        TabView() {
-            ChartLayout()
-                .environmentObject(manager.dataManager)
+        TabView(selection: $selection) {
+            
+            LiveDataView()
+                .environmentObject(manager)
                 .tabItem {
                     Image(systemName: "chart.line.uptrend.xyaxis")
                         .foregroundStyle(.mint, .gray)
                         .font(.system(size: 42.0))
-                    Text("Chart")
-                }.tag(1)
-            Text("Data").tabItem {
-                Image(systemName: "archivebox.fill")
-                Text("Data")
-            }
-            .tag(2)
+                    Text("live Data")
+                }.tag(0)
+            
+            
+//            ChartLayout()
+//                .environmentObject(manager)
+//                .tabItem {
+//                    Image(systemName: "chart.line.uptrend.xyaxis")
+//                        .foregroundStyle(.mint, .gray)
+//                        .font(.system(size: 42.0))
+//                    Text("Chart")
+//                }.tag(1)
+            
+            
+            Text("Data")
+                .tabItem {
+                    Image(systemName: "archivebox.fill")
+                    Text("Data")
+                }.tag(2)
             
             ScannerView()
                 .environmentObject(manager)

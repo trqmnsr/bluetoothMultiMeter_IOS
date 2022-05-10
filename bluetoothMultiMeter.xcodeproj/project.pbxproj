@@ -10,19 +10,27 @@
 		541A7D94280D3EA80048F3D1 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541A7D93280D3EA80048F3D1 /* DataSource.swift */; };
 		541A7D9D280E8A0C0048F3D1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541A7D9C280E8A0C0048F3D1 /* CoreBluetooth.framework */; };
 		541A7DA2280F00680048F3D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541A7DA1280F00680048F3D1 /* Constants.swift */; };
-		5433FBB22813DF4F00A7B541 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBB12813DF4F00A7B541 /* DetailsView.swift */; };
-		5433FBB62813E48F00A7B541 /* DataSourceGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBB52813E48F00A7B541 /* DataSourceGenerator.swift */; };
+		542191762825F9C100A7895D /* MyQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542191752825F9C100A7895D /* MyQueue.swift */; };
 		5433FBB82814014E00A7B541 /* DetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBB72814014E00A7B541 /* DetailCellView.swift */; };
 		5433FBBA2814BF3300A7B541 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBB92814BF3300A7B541 /* TestView.swift */; };
 		5433FBBF2814FDA600A7B541 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBBE2814FDA600A7B541 /* DataView.swift */; };
 		5433FBCC28152F4700A7B541 /* PeripheralRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBCB28152F4700A7B541 /* PeripheralRow.swift */; };
 		5433FBCE28153AC900A7B541 /* RSSIAntena.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBCD28153AC900A7B541 /* RSSIAntena.swift */; };
 		5433FBD228167AF000A7B541 /* RssiStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433FBD128167AF000A7B541 /* RssiStrength.swift */; };
+		5467E6FF281B1E1F001F888F /* PeripheralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5467E6FE281B1E1F001F888F /* PeripheralState.swift */; };
+		5467E703281B383C001F888F /* DigitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5467E702281B383C001F888F /* DigitalView.swift */; };
 		546A8C1E2811ABE000DAEE2C /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A8C1B2811ABE000DAEE2C /* BluetoothManager.swift */; };
 		546A8C232811AC4100DAEE2C /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A8C222811AC4100DAEE2C /* ScannerView.swift */; };
 		54ABF58D280F46E8004A0219 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ABF58C280F46E8004A0219 /* NavigationView.swift */; };
+		54CFB2B4282765A9009BB3B2 /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CFB2B3282765A9009BB3B2 /* RecordingState.swift */; };
+		54CFB2B628285B98009BB3B2 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CFB2B528285B98009BB3B2 /* ActivityViewController.swift */; };
+		54CFB2B82829B203009BB3B2 /* MyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CFB2B72829B203009BB3B2 /* MyButtonStyle.swift */; };
+		54CFB2C0282A1254009BB3B2 /* LiveDataViewSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CFB2BF282A1254009BB3B2 /* LiveDataViewSupport.swift */; };
+		54CFB2C2282A14E8009BB3B2 /* SnapshotExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CFB2C1282A14E8009BB3B2 /* SnapshotExtention.swift */; };
+		54F13EE02821C81D00C26752 /* LiveDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F13EDF2821C81D00C26752 /* LiveDataView.swift */; };
+		54F13EE72822649A00C26752 /* LiveViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F13EE62822649A00C26752 /* LiveViewRow.swift */; };
+		54F13EE92822C6A800C26752 /* PeripheralModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F13EE82822C6A800C26752 /* PeripheralModes.swift */; };
 		54F3AE8628091E6B00602134 /* bluetoothMultiMeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3AE8528091E6B00602134 /* bluetoothMultiMeterApp.swift */; };
-		54F3AE8828091E6B00602134 /* ChartLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3AE8728091E6B00602134 /* ChartLayout.swift */; };
 		54F3AE8A28091E6D00602134 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F3AE8928091E6D00602134 /* Assets.xcassets */; };
 		54F3AE8D28091E6D00602134 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F3AE8C28091E6D00602134 /* Preview Assets.xcassets */; };
 		54F3AEA428091F4B00602134 /* LineChartElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3AEA328091F4B00602134 /* LineChartElement.swift */; };
@@ -67,20 +75,28 @@
 		541A7D93280D3EA80048F3D1 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		541A7D9C280E8A0C0048F3D1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		541A7DA1280F00680048F3D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		5433FBB12813DF4F00A7B541 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
-		5433FBB52813E48F00A7B541 /* DataSourceGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceGenerator.swift; sourceTree = "<group>"; };
+		542191752825F9C100A7895D /* MyQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQueue.swift; sourceTree = "<group>"; };
 		5433FBB72814014E00A7B541 /* DetailCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellView.swift; sourceTree = "<group>"; };
 		5433FBB92814BF3300A7B541 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		5433FBBE2814FDA600A7B541 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		5433FBCB28152F4700A7B541 /* PeripheralRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralRow.swift; sourceTree = "<group>"; };
 		5433FBCD28153AC900A7B541 /* RSSIAntena.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSIAntena.swift; sourceTree = "<group>"; };
 		5433FBD128167AF000A7B541 /* RssiStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssiStrength.swift; sourceTree = "<group>"; };
+		5467E6FE281B1E1F001F888F /* PeripheralState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralState.swift; sourceTree = "<group>"; };
+		5467E702281B383C001F888F /* DigitalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalView.swift; sourceTree = "<group>"; };
 		546A8C1B2811ABE000DAEE2C /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BluetoothManager.swift; path = ../../../BluetoothLearn/BluetoothLearn/BluetoothManager.swift; sourceTree = "<group>"; };
 		546A8C222811AC4100DAEE2C /* ScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		54ABF58C280F46E8004A0219 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		54CFB2B3282765A9009BB3B2 /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
+		54CFB2B528285B98009BB3B2 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		54CFB2B72829B203009BB3B2 /* MyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonStyle.swift; sourceTree = "<group>"; };
+		54CFB2BF282A1254009BB3B2 /* LiveDataViewSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDataViewSupport.swift; sourceTree = "<group>"; };
+		54CFB2C1282A14E8009BB3B2 /* SnapshotExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotExtention.swift; sourceTree = "<group>"; };
+		54F13EDF2821C81D00C26752 /* LiveDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDataView.swift; sourceTree = "<group>"; };
+		54F13EE62822649A00C26752 /* LiveViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewRow.swift; sourceTree = "<group>"; };
+		54F13EE82822C6A800C26752 /* PeripheralModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralModes.swift; sourceTree = "<group>"; };
 		54F3AE8228091E6B00602134 /* bluetoothMultiMeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bluetoothMultiMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F3AE8528091E6B00602134 /* bluetoothMultiMeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bluetoothMultiMeterApp.swift; sourceTree = "<group>"; };
-		54F3AE8728091E6B00602134 /* ChartLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLayout.swift; sourceTree = "<group>"; };
 		54F3AE8928091E6D00602134 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F3AE8C28091E6D00602134 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		54F3AEA328091F4B00602134 /* LineChartElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartElement.swift; sourceTree = "<group>"; };
@@ -110,6 +126,7 @@
 				5433FBBB2814FA7900A7B541 /* LiveViews */,
 				54ABF590280F4C43004A0219 /* Elements */,
 				54ABF58C280F46E8004A0219 /* NavigationView.swift */,
+				54CFB2B72829B203009BB3B2 /* MyButtonStyle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -117,10 +134,13 @@
 		5433FBBB2814FA7900A7B541 /* LiveViews */ = {
 			isa = PBXGroup;
 			children = (
-				54F3AE8728091E6B00602134 /* ChartLayout.swift */,
-				5433FBB12813DF4F00A7B541 /* DetailsView.swift */,
+				54CFB2BA2829D896009BB3B2 /* New Group */,
 				54F3AEA328091F4B00602134 /* LineChartElement.swift */,
 				5433FBB72814014E00A7B541 /* DetailCellView.swift */,
+				5467E702281B383C001F888F /* DigitalView.swift */,
+				54F13EDF2821C81D00C26752 /* LiveDataView.swift */,
+				54F13EE62822649A00C26752 /* LiveViewRow.swift */,
+				54CFB2BF282A1254009BB3B2 /* LiveDataViewSupport.swift */,
 			);
 			path = LiveViews;
 			sourceTree = "<group>";
@@ -149,6 +169,10 @@
 			children = (
 				5433FBD128167AF000A7B541 /* RssiStrength.swift */,
 				54F6552F2817C8A600554B11 /* Peripheral.swift */,
+				5467E6FE281B1E1F001F888F /* PeripheralState.swift */,
+				54F13EE82822C6A800C26752 /* PeripheralModes.swift */,
+				54CFB2B3282765A9009BB3B2 /* RecordingState.swift */,
+				54CFB2B528285B98009BB3B2 /* ActivityViewController.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -167,6 +191,14 @@
 				5433FBB92814BF3300A7B541 /* TestView.swift */,
 			);
 			path = Elements;
+			sourceTree = "<group>";
+		};
+		54CFB2BA2829D896009BB3B2 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				54CFB2C1282A14E8009BB3B2 /* SnapshotExtention.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		54F3AE7928091E6B00602134 = {
@@ -219,10 +251,10 @@
 		54F3AEA028091F3800602134 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				541A7DA1280F00680048F3D1 /* Constants.swift */,
 				546A8C1B2811ABE000DAEE2C /* BluetoothManager.swift */,
 				541A7D93280D3EA80048F3D1 /* DataSource.swift */,
-				541A7DA1280F00680048F3D1 /* Constants.swift */,
-				5433FBB52813E48F00A7B541 /* DataSourceGenerator.swift */,
+				542191752825F9C100A7895D /* MyQueue.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -332,22 +364,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54CFB2C0282A1254009BB3B2 /* LiveDataViewSupport.swift in Sources */,
 				5433FBBA2814BF3300A7B541 /* TestView.swift in Sources */,
 				54ABF58D280F46E8004A0219 /* NavigationView.swift in Sources */,
 				5433FBCE28153AC900A7B541 /* RSSIAntena.swift in Sources */,
 				5433FBB82814014E00A7B541 /* DetailCellView.swift in Sources */,
-				5433FBB62813E48F00A7B541 /* DataSourceGenerator.swift in Sources */,
-				54F3AE8828091E6B00602134 /* ChartLayout.swift in Sources */,
+				54F13EE92822C6A800C26752 /* PeripheralModes.swift in Sources */,
+				5467E6FF281B1E1F001F888F /* PeripheralState.swift in Sources */,
 				541A7D94280D3EA80048F3D1 /* DataSource.swift in Sources */,
-				5433FBB22813DF4F00A7B541 /* DetailsView.swift in Sources */,
+				54CFB2B628285B98009BB3B2 /* ActivityViewController.swift in Sources */,
 				54F655302817C8A600554B11 /* Peripheral.swift in Sources */,
 				54F3AE8628091E6B00602134 /* bluetoothMultiMeterApp.swift in Sources */,
 				5433FBCC28152F4700A7B541 /* PeripheralRow.swift in Sources */,
+				54CFB2B82829B203009BB3B2 /* MyButtonStyle.swift in Sources */,
 				54F3AEA428091F4B00602134 /* LineChartElement.swift in Sources */,
+				54F13EE72822649A00C26752 /* LiveViewRow.swift in Sources */,
 				5433FBBF2814FDA600A7B541 /* DataView.swift in Sources */,
 				541A7DA2280F00680048F3D1 /* Constants.swift in Sources */,
 				5433FBD228167AF000A7B541 /* RssiStrength.swift in Sources */,
+				542191762825F9C100A7895D /* MyQueue.swift in Sources */,
 				546A8C1E2811ABE000DAEE2C /* BluetoothManager.swift in Sources */,
+				54CFB2C2282A14E8009BB3B2 /* SnapshotExtention.swift in Sources */,
+				54CFB2B4282765A9009BB3B2 /* RecordingState.swift in Sources */,
+				5467E703281B383C001F888F /* DigitalView.swift in Sources */,
+				54F13EE02821C81D00C26752 /* LiveDataView.swift in Sources */,
 				54F655342817EBEE00554B11 /* ConnectedPeripheralView.swift in Sources */,
 				546A8C232811AC4100DAEE2C /* ScannerView.swift in Sources */,
 			);
@@ -482,11 +522,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bluetoothMultiMeter/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bluetooth Multimeter";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Required to connect to Bluetooth Deveices";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Required to connect to Bluetooth Deveices";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "No Copyrightnow. Have fun.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Required to save Chart Image to Photo Library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -516,11 +557,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bluetoothMultiMeter/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bluetooth Multimeter";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Required to connect to Bluetooth Deveices";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Required to connect to Bluetooth Deveices";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "No Copyrightnow. Have fun.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Required to save Chart Image to Photo Library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

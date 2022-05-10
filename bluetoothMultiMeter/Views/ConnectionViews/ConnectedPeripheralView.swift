@@ -16,14 +16,18 @@ struct ConnectedPeripheralView: View {
     
     var body: some View {
         HStack {
-            Text(peripheral.name)
+            VStack {
+                Text(peripheral.name)
+                Spacer()
+                Text(peripheral.id.state.toString())
+            }
             Spacer()
             VStack {
                 RSSIAntena(rssiValue: peripheral.rssiValue)
                 Spacer()
                 Button("Disconnect", action: {peripheral.disconnect()})
             }
-        }
+        }.padding()
     } // body
     
     

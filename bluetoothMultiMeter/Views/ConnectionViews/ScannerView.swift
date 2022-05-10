@@ -15,7 +15,7 @@ struct ScannerView: View {
     
     var sortedConnectedPeripherals: [Peripheral] {
         manager
-            .connectedPeripheral
+            .connectedPeripherals
             .sorted(by: {$0.name < $1.name})
     }
     
@@ -24,7 +24,7 @@ struct ScannerView: View {
             .peripherals
             .map {$0.value}
             //.filter {!central.connectedPeripheral.contains($0)}
-            .filter{ $0.rssiValue != RssiSignal.unusable }
+            //.filter{ $0.rssiValue != RssiSignal.unusable }
             .sorted(by: {$0.name < $1.name})
         }
     
@@ -38,21 +38,17 @@ struct ScannerView: View {
             
             
             List {
-                Section  {
-                    Text("Connected Devices")
-                        .font(.headline)
+                Section ("Connected Devices") {
+                    ForEach (sortedConnectedPeripherals) { peripheral in
+                        ConnectedPeripheralView(peripheral: peripheral).frame(height: 100.0)
+                    }
                 }
-                ForEach (sortedConnectedPeripherals) { peripheral in
-                    ConnectedPeripheralView(peripheral: peripheral).frame(height: 100.0)
-                }
-                Section  {
-                    Text("Available Devices")
-                        .font(.headline)
-                }
-                ForEach (sortedAvailablePeripheralList) { peripheral in
-                    PeripheralRow(peripheral: peripheral).frame(height: 50.0)
-                }
-                //Text("ok")
+                
+                Section ("Available Devices", content: {
+                    ForEach (sortedAvailablePeripheralList) { peripheral in
+                        PeripheralRow(peripheral: peripheral).frame(height: 50.0)
+                    }
+                })
                 
             } // list
         } // Vstack
@@ -63,7 +59,7 @@ struct ScannerView: View {
 struct Scanner_Previews: PreviewProvider {
     static var previews: some View {
         ScannerView()
-            .environmentObject(BluetoothManager(data: DataSourceGenerator()))
+            .environmentObject(BluetoothManager())
     }
 }
 

@@ -7,16 +7,41 @@
 
 import SwiftUI
 import CoreBluetooth
+import Charts
 
 
-class Peripheral: NSObject, Identifiable {
+class Peripheral: NSObject, Identifiable, ObservableObject {
     
     let id: CBPeripheral
+    
     private let central: BluetoothManager
+    var dataSet: LineChartDataSet!
     
     var name: String {id.name ?? "No Name"}
-    
+    private var recordingState = false
+    private var timeZero: Double = 0.0
+    @Published var isIncluded: Bool = true
+    @Published var currentValue = 0.00
     @Published var rssiValue: RssiSignal
+    @Published var mode: PeripheralMode = .unknown
+    @Published var colour: CGColor = .init(
+        red: .random(in: ClosedRange(uncheckedBounds: (lower: 0.0, upper: 1.0)) ),
+        green: .random(in: ClosedRange(uncheckedBounds: (lower: 0.0, upper: 1.0)) ),
+        blue: .random(in: ClosedRange(uncheckedBounds: (lower: 0.0, upper: 1.0)) ),
+        alpha: 1)
+    var color: CGColor {
+        get{
+            return colour
+        }
+        set(newcolor) {
+            colour = newcolor
+            if let dataset = dataSet {
+                dataset.colors = [UIColor(cgColor: newcolor)]
+            }
+        }
+    }
+    
+    var update: () -> Void = {}
     
     init(peripheral: CBPeripheral, central: BluetoothManager) {
         id = peripheral
@@ -30,7 +55,6 @@ class Peripheral: NSObject, Identifiable {
         if id.state != .connected {
             central.connect(Peripheral: self)
         }
-        
     }
     
     func disconnect() {
@@ -42,7 +66,7 @@ class Peripheral: NSObject, Identifiable {
     func discoverServices(peripheral: CBPeripheral) {
         peripheral.discoverServices([])
     }
-     
+    
     // Call after discovering services
     func discoverCharacteristics(peripheral: CBPeripheral) {
         guard let services = peripheral.services else {
@@ -55,12 +79,55 @@ class Peripheral: NSObject, Identifiable {
     
     func subscribeToNotifications(peripheral: CBPeripheral, characteristic: CBCharacteristic) {
         peripheral.setNotifyValue(true, for: characteristic)
-     }
+    }
     
     func updaterssi(rssValue: NSNumber) {
         rssiValue = RssiSignal.getSignalFor(value: rssValue)
     }
     
+    func addPoint(value: Double) {
+        
+        currentValue = value
+        if recordingState {
+            if let dataset = dataSet {
+                if recordingState {
+                    let timeX = Peripheral.now() - timeZero
+                    //print("x: \(timeX), y: \(value)")
+                    let newPoint = ChartDataEntry(x: timeX, y: value)
+                    dataset.append(newPoint)
+                    update()
+                }
+            }
+        }
+    }
+    
+    func getData() -> Void {
+        guard let dataset = dataSet else {return}
+        dataset.entries
+        
+    }
+
+    
+    func startRecord(dataset newdata: LineChartDataSet, updater: @escaping ()-> Void ){
+        dataSet = newdata
+        timeZero = Peripheral.now()
+        recordingState = true
+        update = updater
+    }
+    
+    func stopRecording() {
+        recordingState = false
+    }
+    
+    private func decodeDataToInteger(data: Data) -> Int {
+        return 1
+    }
+    
+    
+    private static func now() -> Double{
+        return Double(DispatchTime.now().uptimeNanoseconds) / 1000000000
+        
+    }
     
 }
 
@@ -89,14 +156,22 @@ extension Peripheral: CBPeripheralDelegate {
     
     // MARK: This function receives the data
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        if let error = error {
-            // Handle error
+        guard let data: Data = characteristic.value else {
             return
         }
-        guard let value: Data = characteristic.value else {
-            return
-        }
-        central.addPoint(y: Double(value[0]))
+        var modenum: Int = 0
+        var value: Double = 0.0
+        
+        data.withUnsafeBytes({
+            modenum = Int($0[2])
+            value = Double($0.load(as: Int16.self))/1000
+            
+        })
+        
+        //print("Mode: \(mode) Value: \(value)")
+        mode.changeMode(modeIndex: modenum)
+        addPoint(value: value)
+        
         
     }
     
@@ -112,7 +187,7 @@ extension Peripheral: CBPeripheralDelegate {
     }
     
     
-
+    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard let characteristics = service.characteristics else {
             print(error!)
@@ -120,9 +195,9 @@ extension Peripheral: CBPeripheralDelegate {
         }
         // Consider storing important characteristics internally for easy access and equivalency checks later.
         // From here, can read/write to characteristics or subscribe to notifications as desired.
-
+        
         for characteristic in characteristics {
-//            print("**Characteristic**\(characteristic.debugDescription)" )
+            //            print("**Characteristic**\(characteristic.debugDescription)" )
             subscribeToNotifications(peripheral: peripheral, characteristic: characteristic)
             
         }
@@ -137,9 +212,9 @@ extension Peripheral: CBPeripheralDelegate {
         }
         // Successfully subscribed to or unsubscribed from notifications/indications on a characteristic
         //print("Did update Notification \(characteristic.debugDescription)")
-       
+        
     }
     
-
+    
     
 }
