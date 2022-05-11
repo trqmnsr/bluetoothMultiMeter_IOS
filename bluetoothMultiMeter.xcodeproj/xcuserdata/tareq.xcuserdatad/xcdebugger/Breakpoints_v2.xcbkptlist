@@ -14,8 +14,8 @@
             filePath = "bluetoothMultiMeter/Models/Peripheral.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "peripheral(_:didUpdateValueFor:error:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -32,24 +32,40 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
             endingLineNumber = "15"
-            landmarkName = "snapshot()"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5A6D8273-96F6-4058-AEA0-64E1158BE3DF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bluetoothMultiMeter/Models/Peripheral.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "getJSONData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "796522EA-575D-4092-903F-A032BB7D97D1"
+            uuid = "E560A185-A788-4F96-8F47-3D7B0A411296"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "bluetoothMultiMeter/Views/LiveViews/LiveDataViewSupport.swift"
+            filePath = "bluetoothMultiMeter/Models/Peripheral.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "controlView"
-            landmarkType = "24">
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "getJSONData()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

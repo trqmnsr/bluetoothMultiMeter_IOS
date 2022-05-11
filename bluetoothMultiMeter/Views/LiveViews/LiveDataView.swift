@@ -22,12 +22,15 @@ struct LiveDataView: View {
     
     @State var recordState: RecordingState = .standby
     
-    @State var shareModal = false
+    @State var isDropDown = true
+    
+    @State var shareImageModal = false
+    
+    @State var shareDataModal = false
     
     @State var isLabelsShown = false
     
     @State var pickViewDropdown: DropdownOptions = .controlsV
-    
     
     
     var body: some View {
@@ -42,13 +45,9 @@ struct LiveDataView: View {
             
             chartView
             
-            
-            
         }
     }
-    
-    
-    
+
 }
 
 

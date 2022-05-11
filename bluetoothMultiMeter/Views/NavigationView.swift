@@ -25,21 +25,11 @@ struct NavigationView: View {
                 }.tag(0)
             
             
-//            ChartLayout()
-//                .environmentObject(manager)
+//            Text("Data")
 //                .tabItem {
-//                    Image(systemName: "chart.line.uptrend.xyaxis")
-//                        .foregroundStyle(.mint, .gray)
-//                        .font(.system(size: 42.0))
-//                    Text("Chart")
-//                }.tag(1)
-            
-            
-            Text("Data")
-                .tabItem {
-                    Image(systemName: "archivebox.fill")
-                    Text("Data")
-                }.tag(2)
+//                    Image(systemName: "archivebox.fill")
+//                    Text("Data")
+//                }.tag(2)
             
             ScannerView()
                 .environmentObject(manager)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LiveViewRow: View {
+struct DeviceLiveCell: View {
     
     @StateObject var peripheral: Peripheral
     @State var isShownOnGraph = true

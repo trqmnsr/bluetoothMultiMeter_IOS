@@ -8,16 +8,16 @@
 import SwiftUI
 import Charts
 
-final class LineChartElement: UIViewRepresentable {
+struct LineChartElement: UIViewRepresentable {
     
-    var dataEntries: [ChartDataEntry] = [ChartDataEntry(x: 0, y: 0), ChartDataEntry(x: 10, y: 0)]
+    var dataEntries: [ChartDataEntry] = [ChartDataEntry(x: 0, y: 0)]
     var data: LineChartData = LineChartData()
     var datasets: [LineChartDataSet] = [LineChartDataSet]()
 
     @State private var linechart: LineChartView = LineChartView()
     
     init() {
-        data.append(hiddenDataSet())
+        //data.append(hiddenDataSet())
         linechart.data = data
     }
     
@@ -93,9 +93,7 @@ final class LineChartElement: UIViewRepresentable {
     
     
     
-    func startRecording(peripheral: Peripheral) -> LineChartDataSet {
-        data.dataSets.removeAll(keepingCapacity: false)
-        //data.dataSets.removeFirst()
+    func addPeripheral(peripheral: Peripheral) -> LineChartDataSet {
         let newDataSet = LineChartDataSet(label: peripheral.name)
         data.append(newDataSet)
         formatDataSet(dataSet: newDataSet)
@@ -104,8 +102,19 @@ final class LineChartElement: UIViewRepresentable {
     }
     
     func reset() {
-        
+        data.dataSets.removeAll(keepingCapacity: false)
     }
+    
+    func startRecording(peripheral: Peripheral) -> LineChartDataSet {
+        //data.dataSets.removeAll(keepingCapacity: false)
+        //data.dataSets.removeFirst()
+        let newDataSet = LineChartDataSet(label: peripheral.name)
+        data.append(newDataSet)
+        formatDataSet(dataSet: newDataSet)
+        newDataSet.colors = [UIColor(cgColor: peripheral.color)]
+        return newDataSet
+    }
+    
     
     func update(){
         if data.count > 0{

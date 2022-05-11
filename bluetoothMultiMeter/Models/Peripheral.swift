@@ -21,7 +21,7 @@ class Peripheral: NSObject, Identifiable, ObservableObject {
     private var recordingState = false
     private var timeZero: Double = 0.0
     @Published var isIncluded: Bool = true
-    @Published var currentValue = 0.00
+    @Published var currentValue : Double = 0.0
     @Published var rssiValue: RssiSignal
     @Published var mode: PeripheralMode = .unknown
     @Published var colour: CGColor = .init(
@@ -92,7 +92,6 @@ class Peripheral: NSObject, Identifiable, ObservableObject {
             if let dataset = dataSet {
                 if recordingState {
                     let timeX = Peripheral.now() - timeZero
-                    //print("x: \(timeX), y: \(value)")
                     let newPoint = ChartDataEntry(x: timeX, y: value)
                     dataset.append(newPoint)
                     update()
@@ -101,10 +100,30 @@ class Peripheral: NSObject, Identifiable, ObservableObject {
         }
     }
     
-    func getData() -> Void {
-        guard let dataset = dataSet else {return}
-        dataset.entries
-        
+    func getJSONData() -> Data? {
+        guard let dataset = dataSet else {return nil}
+        let points = dataset.entries.map({["x":$0.x,"y":$0.y]})
+        let dictData: [String : Any] = [
+            "title": name,
+            "xmin": dataset.xMin,
+            "xmax": dataset.xMax,
+            "ymin": dataset.yMin,
+            "ymax": dataset.yMax,
+            "points": points
+        ]
+        do {
+            if JSONSerialization.isValidJSONObject(dictData) {
+                let data = try JSONSerialization.data(withJSONObject: dictData, options: .prettyPrinted)
+                return data
+            } else {
+                print("not valid json")
+            }
+
+        } catch {
+            print(error)
+        }
+
+        return nil
     }
 
     
@@ -130,7 +149,6 @@ class Peripheral: NSObject, Identifiable, ObservableObject {
     }
     
 }
-
 
 
 // MARK: Peripheral Delegate
@@ -164,13 +182,13 @@ extension Peripheral: CBPeripheralDelegate {
         
         data.withUnsafeBytes({
             modenum = Int($0[2])
-            value = Double($0.load(as: Int16.self))/1000
-            
+            mode.changeMode(modeIndex: modenum)
+            value = mode.getCalculatedValue(value: $0.load(as: Int16.self))
+            addPoint(value: value)
         })
         
-        //print("Mode: \(mode) Value: \(value)")
-        mode.changeMode(modeIndex: modenum)
-        addPoint(value: value)
+        print("Periph: \(name) Mode: \(modenum) Value: \(value)")
+        
         
         
     }
@@ -187,7 +205,6 @@ extension Peripheral: CBPeripheralDelegate {
     }
     
     
-    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard let characteristics = service.characteristics else {
             print(error!)
@@ -201,7 +218,6 @@ extension Peripheral: CBPeripheralDelegate {
             subscribeToNotifications(peripheral: peripheral, characteristic: characteristic)
             
         }
-        
     }
     
     
@@ -212,6 +228,7 @@ extension Peripheral: CBPeripheralDelegate {
         }
         // Successfully subscribed to or unsubscribed from notifications/indications on a characteristic
         //print("Did update Notification \(characteristic.debugDescription)")
+        
         
     }
     

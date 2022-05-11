@@ -32,16 +32,19 @@ extension LiveDataView{
         }
     }
     
+    var hasNoConnections: Bool {
+        manager.connectedPeripherals.isEmpty
+    }
+    
     var deviceView: some View {
-        //DisclosureGroup(deviceDropdownHeader, isExpanded: $devicesisExpanded) {
+        
+        
         ForEach(sortedConnectedPeripheralList) { peripheral in
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 400))]) {
-                LiveViewRow(peripheral: peripheral)
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300, maximum: 400))]) {
+                DeviceLiveCell(peripheral: peripheral)
                     .id(peripheral.id.id)
             }
         }
-        //}.padding(.horizontal)
-        
     }
     
     var chartView: some View {
@@ -69,19 +72,24 @@ extension LiveDataView{
     
     var dropDownPicker: some View {
         
-        DisclosureGroup(deviceDropdownHeader) {
+        DisclosureGroup(deviceDropdownHeader, isExpanded: $isDropDown) {
             Picker("Picker", selection: $pickViewDropdown) {
-                //deviceView.tag(DropdownOptions.deviceV)
-                //controlView.tag(DropdownOptions.controlsV)
                 Text("Controls").tag(DropdownOptions.controlsV)
                 Text("Devices").tag(DropdownOptions.deviceV)
             }
             .pickerStyle(.segmented)
             
             if pickViewDropdown.id == .controlsV {
-                controlView
+                
+                    controlView
+
+                
             } else {
+                if hasNoConnections {
+                    Text("Device not Connected")
+                } else {
                 deviceView
+                }
             }
             
             
@@ -89,14 +97,13 @@ extension LiveDataView{
     }
     
     var controlView: some View {
-        //DisclosureGroup("Controls"){
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
             Button(recordState.title(), action: {
                 switch  recordState {
                 case .standby:
                     for peripheral in sortedConnectedPeripheralList {
+                        linechart.reset()
                         if peripheral.isIncluded{
-                            
                             let dataset = linechart.startRecording(peripheral: peripheral)
                             peripheral.startRecord(dataset: dataset, updater: linechart.update)
                         }
@@ -115,14 +122,21 @@ extension LiveDataView{
             .buttonStyle(MyButtonStyle())
             .disabled(isDisabledNoPeripheral)
             
-            Button("Share Image", action: {
-                shareModal = true
+            Button("Share Image", action: { shareImageModal = true })
+            .buttonStyle(MyButtonStyle())
+            .sheet(isPresented: $shareImageModal, content: {
+                let image = linechart.getImage()
+                ActivityViewController(activityItems: [image])
+            })
+            Button("Share Data", action: {
+                shareDataModal = true
             })
             .buttonStyle(MyButtonStyle())
-            //.disabled(isDisabledNoPeripheral)
-            .sheet(isPresented: $shareModal, content: {
-                //let image = chartView.snapshot()
-                ActivityViewController(activityItems: [linechart.getImage()])
+            .sheet(isPresented: $shareDataModal, content: {
+                let data: [Data] = sortedConnectedPeripheralList.map({$0.getJSONData() ?? Data()})
+                
+                ActivityViewController(activityItems: data)
+                
             })
             
             Toggle("Labels", isOn: $isLabelsShown)
@@ -130,7 +144,6 @@ extension LiveDataView{
         }.frame( alignment: .leading)
             .frame(alignment: .topLeading)
             .padding()
-        //}.padding(.horizontal)
     }
 }
 

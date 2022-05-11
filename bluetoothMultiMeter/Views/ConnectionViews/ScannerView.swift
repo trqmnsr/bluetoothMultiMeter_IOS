@@ -16,6 +16,7 @@ struct ScannerView: View {
     var sortedConnectedPeripherals: [Peripheral] {
         manager
             .connectedPeripherals
+            .filter({$0.rssiValue != .unusable   })
             .sorted(by: {$0.name < $1.name})
     }
     
@@ -23,8 +24,8 @@ struct ScannerView: View {
         manager
             .peripherals
             .map {$0.value}
-            //.filter {!central.connectedPeripheral.contains($0)}
-            //.filter{ $0.rssiValue != RssiSignal.unusable }
+            .filter {!(manager.connectedPeripherals.contains($0))}
+            .filter{ $0.rssiValue != RssiSignal.unusable }
             .sorted(by: {$0.name < $1.name})
         }
     
