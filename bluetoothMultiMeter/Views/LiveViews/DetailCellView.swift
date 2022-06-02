@@ -13,7 +13,7 @@ struct DetailCellView: View {
     var value: Double
     
     private var formattedLabel: String {
-        String("\(label): ")
+        String("\(label) ")
     }
     
     private var stringValue: String {

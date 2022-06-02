@@ -11,6 +11,8 @@ struct DeviceLiveCell: View {
     
     @StateObject var peripheral: Peripheral
     @State var isShownOnGraph = true
+    @Binding var currentState: RecordingState
+    @State var showConfig: Bool = false
     
     var modeTitle: String {
         peripheral.mode.settings().title
@@ -26,6 +28,10 @@ struct DeviceLiveCell: View {
         } else {
             return false
         }
+    }
+    
+    var isDisableWhileRecoring: Bool {
+        currentState == .recording
     }
     
     var max_value: Double {
@@ -48,29 +54,41 @@ struct DeviceLiveCell: View {
     
     var body: some View {
         VStack {
-            Text("\(peripheral.name): \(modeTitle) in \(modeUnits)")
             HStack {
-                DetailCellView(label: "CUR", value: peripheral.currentValue)
+                Text("\(peripheral.name)")
                 Spacer()
-                DetailCellView(label: "AVE", value: ave_value)
+                Text("Mode Select:")
+                Picker("Mode", selection: $peripheral.mode) {
+                    ForEach (PeripheralMode.allCases, content: { mode in
+                        Text( mode.settings().title )
+                            .tag(mode)
+                    })
+                    
+                }.disabled(isDisableWhileRecoring)
             }
-            .frame( alignment: .leading)
+            HStack {
+                DetailCellView(label: "", value: peripheral.currentValue)
+                    .frame( alignment: .trailing)
+                    .font(.custom("Big", fixedSize: 40.0))
+                Spacer()
+                Text(peripheral.mode.settings().units)
+            }
+            HStack {
+                DetailCellView(label: "MAX:", value: max_value)
+                Spacer()
+                DetailCellView(label: "AVE:", value: ave_value)
+                Spacer()
+                DetailCellView(label: "MIN:", value: min_value)
+            }
+            .frame( alignment: .center)
             
             HStack {
-                DetailCellView(label: "MAX", value: max_value)
-                Spacer()
-                DetailCellView(label: "MIN", value: min_value)
+                Button("Graph Config") { showConfig.toggle() }
+                    .sheet(isPresented: $showConfig)  {ConfigDevice(peripheral: peripheral, isPresented: $showConfig)}
                 
             }
-            .frame( alignment: .trailing)
-            
-            HStack {
-                ColorPicker("Color", selection: $peripheral.color, supportsOpacity: false)
-                Spacer()
-                Toggle("Include:", isOn: $peripheral.isIncluded)
-            }
         }
-        .frame( maxWidth: 400, alignment: .leading)
+        .frame( maxWidth: 370, alignment: .leading)
         .padding()
         .border(.foreground, width: 3)
     }
@@ -79,8 +97,14 @@ struct DeviceLiveCell: View {
 
 //import CoreBluetooth
 //struct LiveViewRow_Previews: PreviewProvider {
+//    
+//    var peripheral: Peripheral {
+//        let peripheral = Peripheral(peripheral: CBPeripheral(), central: BluetoothManager())
+//        peripheral.mode = .voltDC25
+//        return peripheral
+//    }
 //
 //   static var previews: some View {
-//       LiveViewRow(peripheral: Peripheral(peripheral: nil, central: BluetoothManager()))
+//       LiveViewRow(peripheral: Peripheral(peripheral: peripheral, central: BluetoothManager()))
 //    }
 //}

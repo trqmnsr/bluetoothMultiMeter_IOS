@@ -7,22 +7,24 @@
 
 import SwiftUI
 
+
+
 struct NavigationView: View {
     
     @StateObject var manager = BluetoothManager()
-    @State private var selection = 1
+    @State var selection: Int = Tabs.liveView.rawValue
     
     var body: some View {
         TabView(selection: $selection) {
             
-            LiveDataView()
+            LiveDataView(tabSelection: $selection)
                 .environmentObject(manager)
                 .tabItem {
                     Image(systemName: "chart.line.uptrend.xyaxis")
                         .foregroundStyle(.mint, .gray)
                         .font(.system(size: 42.0))
                     Text("live Data")
-                }.tag(0)
+                }.tag(Tabs.liveView.rawValue)
             
             
 //            Text("Data")
@@ -43,12 +45,9 @@ struct NavigationView: View {
                 .onDisappear {
                     manager.stopScan()
                 }
-                .tag(3)
+                .tag(Tabs.scanner.rawValue)
         }
     }
-    
-    
-    
 }
 
 struct NavigationView_Previews: PreviewProvider {

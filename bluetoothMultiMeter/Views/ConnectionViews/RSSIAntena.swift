@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RSSIAntena: View {
     
-    @State var rssiValue: RssiSignal
+    @Binding var rssiValue: RssiSignal
 
     var body: some View {
         
@@ -21,6 +21,6 @@ struct RSSIAntena: View {
 
 struct RSSIAntena_Previews: PreviewProvider {
     static var previews: some View {
-        RSSIAntena(rssiValue: .amazing)
+        RSSIAntena(rssiValue: .constant(.amazing) )
     }
 }

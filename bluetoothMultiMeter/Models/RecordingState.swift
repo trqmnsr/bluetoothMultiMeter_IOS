@@ -18,7 +18,6 @@ enum RecordingState {
         case .standby:
             self = .recording
         case .recording:
-            //self = .stopped
             self = .standby
         case .stopped:
             self = .standby

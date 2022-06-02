@@ -15,14 +15,14 @@ struct PeripheralRow: View {
     
     @State var tap = false
     
-    var peripheral: Peripheral
+    @StateObject var peripheral: Peripheral
     
     
     var body: some View {
         HStack {
             Text(peripheral.name)
             Spacer()
-            RSSIAntena(rssiValue: peripheral.rssiValue)
+            RSSIAntena(rssiValue: $peripheral.rssiValue)
         }
             .onTapGesture {
                 tap = true

@@ -20,28 +20,133 @@ class Peripheral: NSObject, Identifiable, ObservableObject {
     var name: String {id.name ?? "No Name"}
     private var recordingState = false
     private var timeZero: Double = 0.0
+    
+    @Published var availableModes: Set<PeripheralMode> = []
+    
     @Published var isIncluded: Bool = true
     @Published var currentValue : Double = 0.0
     @Published var rssiValue: RssiSignal
-    @Published var mode: PeripheralMode = .unknown
-    @Published var colour: CGColor = .init(
-        red: .random(in: ClosedRange(uncheckedBounds: (lower: 0.0, upper: 1.0)) ),
-        green: .random(in: ClosedRange(uncheckedBounds: (lower: 0.0, upper: 1.0)) ),
-        blue: .random(in: ClosedRange(uncheckedBounds: (lower: 0.0, upper: 1.0)) ),
-        alpha: 1)
+    @Published var mode: PeripheralMode = .voltDC25
+    
+    
+    var update: () -> Void = {}
+    
+    
+    // MARK: Configuration Settings
+    private var lineColor: CGColor = .getRandomColor()
     var color: CGColor {
         get{
-            return colour
+            return lineColor
         }
-        set(newcolor) {
-            colour = newcolor
+        set {
+            lineColor = newValue
             if let dataset = dataSet {
-                dataset.colors = [UIColor(cgColor: newcolor)]
+                dataset.colors = [UIColor(cgColor: newValue)]
             }
+            update()
         }
     }
     
-    var update: () -> Void = {}
+    private var lineWidth: Int = 3
+    var linewidth: Int {
+        get {
+            return lineWidth
+        }
+        set {
+            if 1...6 ~= newValue{
+                lineWidth = newValue
+                if let dataset = dataSet {
+                    dataset.lineWidth = CGFloat( newValue)
+                }}
+            update()
+        }
+    }
+    
+    private var lineChartmode: LineChartDataSet.Mode = .linear
+    var lineChartMode: LineChartDataSet.Mode {
+        get {lineChartmode}
+        set {
+            lineChartmode = newValue
+            if let dataset = dataSet {
+                dataset.mode = newValue
+            }
+            update()
+        }
+    }
+    
+    private var showValue: Bool = true
+    var showvalue: Bool {
+        get {
+            return showValue
+        }
+        set {
+            showValue = newValue
+            if let dataset = dataSet {
+                dataset.drawValuesEnabled = newValue
+            }
+            update()
+        }
+    }
+    
+    private var showCircle: Bool = true
+    var showcircle: Bool {
+        get {
+            return showCircle
+        }
+        set {
+            showCircle = newValue
+            if let dataset = dataSet {
+                dataset.drawCirclesEnabled = newValue
+            }
+            update()
+        }
+    }
+    
+    private var circleColor: CGColor = .getRandomColor()
+    var circlecolor: CGColor {
+        get{
+            return circleColor
+        }
+        set {
+            circleColor = newValue
+            if let dataset = dataSet {
+                dataset.circleColors = [UIColor(cgColor: newValue)]
+            }
+            update()
+        }
+    }
+    
+    private var showHole: Bool = false
+    var showhole: Bool {
+        get {
+            return showHole
+        }
+        set{
+            showHole = newValue
+            if let dataset = dataSet {
+                dataset.drawCircleHoleEnabled = newValue
+                dataset.circleHoleColor = newValue ?  UIColor(cgColor: holeColor) : .clear
+            }
+            update()
+        }
+    }
+    
+    private var holeColor: CGColor = .getRandomColor()
+    var holecolor: CGColor {
+        get{
+            return holeColor
+        }
+        set {
+            holeColor = newValue
+            if let dataset = dataSet {
+                dataset.circleHoleColor = UIColor(cgColor: newValue)
+            }
+            update()
+        }
+    }
+    
+    
+    
     
     init(peripheral: CBPeripheral, central: BluetoothManager) {
         id = peripheral
@@ -82,11 +187,11 @@ class Peripheral: NSObject, Identifiable, ObservableObject {
     }
     
     func updaterssi(rssValue: NSNumber) {
-        rssiValue = RssiSignal.getSignalFor(value: rssValue)
+        rssiValue.updateRssi(newRssiValue: rssValue)
     }
     
-    func addPoint(value: Double) {
-        
+    func addPoint(_ data: Data) {
+        let value = mode.formatData(data)
         currentValue = value
         if recordingState {
             if let dataset = dataSet {
@@ -99,12 +204,14 @@ class Peripheral: NSObject, Identifiable, ObservableObject {
             }
         }
     }
+
     
     func getJSONData() -> Data? {
         guard let dataset = dataSet else {return nil}
         let points = dataset.entries.map({["x":$0.x,"y":$0.y]})
         let dictData: [String : Any] = [
             "title": name,
+            "mode": mode.settings(),
             "xmin": dataset.xMin,
             "xmax": dataset.xMax,
             "ymin": dataset.yMin,
@@ -118,14 +225,14 @@ class Peripheral: NSObject, Identifiable, ObservableObject {
             } else {
                 print("not valid json")
             }
-
+            
         } catch {
             print(error)
         }
-
+        
         return nil
     }
-
+    
     
     func startRecord(dataset newdata: LineChartDataSet, updater: @escaping ()-> Void ){
         dataSet = newdata
@@ -137,11 +244,6 @@ class Peripheral: NSObject, Identifiable, ObservableObject {
     func stopRecording() {
         recordingState = false
     }
-    
-    private func decodeDataToInteger(data: Data) -> Int {
-        return 1
-    }
-    
     
     private static func now() -> Double{
         return Double(DispatchTime.now().uptimeNanoseconds) / 1000000000
@@ -160,16 +262,7 @@ extension Peripheral: CBPeripheralDelegate {
         }
         rssiValue = RssiSignal.getSignalFor(value: RSSI)
     }
-    
-    
-    func peripheral(peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: NSError?)
-    {
-        if (error != nil) {
-            print(error!)
-        } else {
-            rssiValue = RssiSignal.getSignalFor(value: RSSI)
-        }
-    }
+
     
     
     // MARK: This function receives the data
@@ -177,19 +270,8 @@ extension Peripheral: CBPeripheralDelegate {
         guard let data: Data = characteristic.value else {
             return
         }
-        var modenum: Int = 0
-        var value: Double = 0.0
         
-        data.withUnsafeBytes({
-            modenum = Int($0[2])
-            mode.changeMode(modeIndex: modenum)
-            value = mode.getCalculatedValue(value: $0.load(as: Int16.self))
-            addPoint(value: value)
-        })
-        
-        print("Periph: \(name) Mode: \(modenum) Value: \(value)")
-        
-        
+        addPoint(data)
         
     }
     
@@ -210,8 +292,6 @@ extension Peripheral: CBPeripheralDelegate {
             print(error!)
             return
         }
-        // Consider storing important characteristics internally for easy access and equivalency checks later.
-        // From here, can read/write to characteristics or subscribe to notifications as desired.
         
         for characteristic in characteristics {
             //            print("**Characteristic**\(characteristic.debugDescription)" )
@@ -226,12 +306,8 @@ extension Peripheral: CBPeripheralDelegate {
             // Handle error
             return
         }
+        peripheral.readRSSI()
         // Successfully subscribed to or unsubscribed from notifications/indications on a characteristic
         //print("Did update Notification \(characteristic.debugDescription)")
-        
-        
     }
-    
-    
-    
 }

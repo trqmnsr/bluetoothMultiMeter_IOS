@@ -5,31 +5,30 @@
 //  Created by Tareq Mansour on 4/14/22.
 //
 //
+
+
 import SwiftUI
 import Charts
 
 struct LineChartElement: UIViewRepresentable {
     
+    
     var dataEntries: [ChartDataEntry] = [ChartDataEntry(x: 0, y: 0)]
-    var data: LineChartData = LineChartData()
+    var data: LineChartData!
     var datasets: [LineChartDataSet] = [LineChartDataSet]()
 
-    @State private var linechart: LineChartView = LineChartView()
-    
-    init() {
-        //data.append(hiddenDataSet())
-        linechart.data = data
-    }
-    
+    @State var linechart: LineChartView = LineChartView()
     
     func makeUIView(context: Context) -> LineChartView {
-        //linechart.highlighter = AHighlighter()
+        linechart.data = data
         linechart.rightAxis.enabled = false
         linechart.legend.enabled = false
-        linechart.accessibilityScroll(.right)
         formatxAxis(axis: linechart.xAxis)
         formatleftAxis(axis: linechart.leftAxis)
-        
+        linechart.doubleTapToZoomEnabled = false
+        linechart.highlightPerDragEnabled = false
+        linechart.chartDescription.enabled = true
+        linechart.pinchZoomEnabled = true
         
         return linechart
     }
@@ -37,18 +36,21 @@ struct LineChartElement: UIViewRepresentable {
     
     func updateUIView(_ uiView: LineChartView, context: Context) {
         update()
-        print("update")
     }
     
-    func formatDataSet(dataSet: LineChartDataSet) {
-        dataSet.lineWidth = 3
-        dataSet.mode = .cubicBezier
-        dataSet.drawCirclesEnabled = true
-        dataSet.drawValuesEnabled = false
+    func formatDataSet(dataSet: LineChartDataSet, peripheral: Peripheral) {
+        dataSet.lineWidth = CGFloat( peripheral.linewidth)
+        dataSet.mode = peripheral.lineChartMode
+        dataSet.drawCirclesEnabled = peripheral.showcircle
+        dataSet.circleColors = [UIColor(cgColor:peripheral.circlecolor)]
+        dataSet.drawCircleHoleEnabled = peripheral.showhole
+        dataSet.circleHoleColor = UIColor(cgColor:peripheral.holecolor)
+        dataSet.drawValuesEnabled = peripheral.showvalue
         dataSet.drawVerticalHighlightIndicatorEnabled  = true
-        dataSet.highlightEnabled = true
-        //dataSet.setDrawHighlightIndicators(true)
-        dataSet.highlightColor = .purple
+        dataSet.highlightEnabled = false
+        
+        dataSet.valueFormatter = DefaultValueFormatter(decimals: 3)
+        dataSet.valueFont = NSUIFont.systemFont(ofSize: 20)
         
     }
     
@@ -57,16 +59,12 @@ struct LineChartElement: UIViewRepresentable {
         axis.labelFont = .systemFont(ofSize: 14)
         axis.labelPosition = .bottom
         axis.accessibilityScroll(.right)
-        
-        //axis.axisRange = 10
-        //axis.axisMinimum = 0
     }
     
     func formatleftAxis(axis: YAxis) {
         axis.axisLineWidth = 2
         axis.labelFont = .systemFont(ofSize: 14)
         axis.axisMinLabels = 0
-        //axis.axisMinimum = 0
     }
     
     
@@ -91,38 +89,38 @@ struct LineChartElement: UIViewRepresentable {
     }
     
     
-    
-    
-    func addPeripheral(peripheral: Peripheral) -> LineChartDataSet {
-        let newDataSet = LineChartDataSet(label: peripheral.name)
-        data.append(newDataSet)
-        formatDataSet(dataSet: newDataSet)
-        newDataSet.colors = [UIColor(cgColor: peripheral.color)]
-        return newDataSet
-    }
-    
     func reset() {
-        data.dataSets.removeAll(keepingCapacity: false)
+        if let data = data {
+            data.dataSets.removeAll(keepingCapacity: false)
+        }
+        
     }
     
-    func startRecording(peripheral: Peripheral) -> LineChartDataSet {
-        //data.dataSets.removeAll(keepingCapacity: false)
-        //data.dataSets.removeFirst()
+    func isEmpty() -> Bool {
+        return data == nil || data.isEmpty
+    }
+    
+    mutating func startRecording(peripheral: Peripheral) -> LineChartDataSet {
+        data = LineChartData()
         let newDataSet = LineChartDataSet(label: peripheral.name)
         data.append(newDataSet)
-        formatDataSet(dataSet: newDataSet)
+        linechart.data = data
+        formatDataSet(dataSet: newDataSet, peripheral: peripheral)
         newDataSet.colors = [UIColor(cgColor: peripheral.color)]
         return newDataSet
     }
     
     
     func update(){
-        if data.count > 0{
-            data.notifyDataChanged()
-            linechart.notifyDataSetChanged()
-                
+        if let data = data {
+            if data.count > 0{
+                data.notifyDataChanged()
+                linechart.notifyDataSetChanged()
+            }
         }
+        
     }
+    
     
     
     
@@ -134,14 +132,26 @@ struct TransactionLineChartView_Previews: PreviewProvider {
     }
 }
 
+//
+//extension Highlighter {
+//
+//
+//    func getHighlight(x: CGFloat, y: CGFloat) -> Highlight? {
+//        print("x Value: \(x)\ny Value: \(y)")
+//        let h = Highlight(x: x, y: y, dataSetIndex: 1)
+//        return h
+//    }
+//
+//}
 
-extension Highlighter {
-    
+
+class MyHighlighter: Highlighter {
     
     func getHighlight(x: CGFloat, y: CGFloat) -> Highlight? {
         print("x Value: \(x)\ny Value: \(y)")
-        let h = Highlight(x: x, y: y, dataSetIndex: 1)
+        let h = Highlight(x: x, y: y, dataSetIndex: 0)
         return h
     }
+    
     
 }

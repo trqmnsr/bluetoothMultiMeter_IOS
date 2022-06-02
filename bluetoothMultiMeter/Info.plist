@@ -14,5 +14,19 @@
 		<string>bluetooth-central</string>
 		<string>bluetooth-peripheral</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>LaunchScreenBackground</string>
+		<key>UIImageName</key>
+		<string>icon</string>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<false/>
+		<key>UILaunchScreen</key>
+		<dict>
+			<key>New item</key>
+			<string></string>
+		</dict>
+	</dict>
 </dict>
 </plist>

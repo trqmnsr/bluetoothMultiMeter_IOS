@@ -13,6 +13,10 @@ extension LiveDataView{
         numberOfConnectedPeripheral < 1
     }
     
+    var isDisableWhileRecording: Bool {
+        recordState == .recording
+    }
+    
     var sortedConnectedPeripheralList: [Peripheral] {
         manager
             .connectedPeripherals
@@ -24,6 +28,10 @@ extension LiveDataView{
         manager.connectedPeripherals.count
     }
     
+    var hasNoConnections: Bool {
+        manager.connectedPeripherals.isEmpty
+    }
+    
     var deviceDropdownHeader: String {
         if numberOfConnectedPeripheral > 0 {
             return "Devices (\(numberOfConnectedPeripheral))"
@@ -32,41 +40,20 @@ extension LiveDataView{
         }
     }
     
-    var hasNoConnections: Bool {
-        manager.connectedPeripherals.isEmpty
-    }
-    
-    var deviceView: some View {
-        
-        
-        ForEach(sortedConnectedPeripheralList) { peripheral in
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300, maximum: 400))]) {
-                DeviceLiveCell(peripheral: peripheral)
-                    .id(peripheral.id.id)
-            }
-        }
-    }
     
     var chartView: some View {
         VStack {
-            isLabelsShown ? Text("Title Hear") : nil
+            isLabelsShown ? Text(chartTitle) : nil
             
             HStack {
-                isLabelsShown ? Text("Volts")
+                isLabelsShown ? Text(chartYLable)
                     .rotationEffect(.degrees(-90)) : nil
                 VStack {
                     linechart
-                    isLabelsShown ? Text("Time (s)") : nil
+                    isLabelsShown ? Text(chartXLable) : nil
                 }
             }
         }
-    }
-    
-    enum DropdownOptions: String, CaseIterable, Identifiable {
-        var id: Self {self}
-        
-        case deviceV
-        case controlsV
     }
     
     
@@ -74,37 +61,38 @@ extension LiveDataView{
         
         DisclosureGroup(deviceDropdownHeader, isExpanded: $isDropDown) {
             Picker("Picker", selection: $pickViewDropdown) {
-                Text("Controls").tag(DropdownOptions.controlsV)
-                Text("Devices").tag(DropdownOptions.deviceV)
+                Text("Controls").tag(GraphViewControlOptions.controlsView)
+                Text("Devices").tag(GraphViewControlOptions.deviceView)
             }
             .pickerStyle(.segmented)
             
-            if pickViewDropdown.id == .controlsV {
-                
-                    controlView
-
-                
+            if pickViewDropdown.id == .controlsView {
+                controlView
             } else {
                 if hasNoConnections {
                     Text("Device not Connected")
+                        .onTapGesture(perform: {
+                            tabSelection = Tabs.scanner.rawValue
+                        })
                 } else {
-                deviceView
+                    deviceView
                 }
             }
-            
-            
         }
     }
     
+    
     var controlView: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            Button(recordState.title(), action: {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150, maximum: 370))]) {
+            Button(recordState.title(),
+                   action: {
                 switch  recordState {
                 case .standby:
                     for peripheral in sortedConnectedPeripheralList {
                         linechart.reset()
+                        let dataset = linechart.startRecording(peripheral: peripheral)
                         if peripheral.isIncluded{
-                            let dataset = linechart.startRecording(peripheral: peripheral)
+                            
                             peripheral.startRecord(dataset: dataset, updater: linechart.update)
                         }
                     }
@@ -123,27 +111,51 @@ extension LiveDataView{
             .disabled(isDisabledNoPeripheral)
             
             Button("Share Image", action: { shareImageModal = true })
-            .buttonStyle(MyButtonStyle())
-            .sheet(isPresented: $shareImageModal, content: {
-                let image = linechart.getImage()
-                ActivityViewController(activityItems: [image])
-            })
+                .disabled(isDisabledNoPeripheral || isDisableWhileRecording  || linechart.isEmpty())
+                .buttonStyle(MyButtonStyle())
+                .sheet(isPresented: $shareImageModal, content: {
+                    let image = linechart.getImage()
+                    ActivityViewController(activityItems: [image])
+                })
             Button("Share Data", action: {
                 shareDataModal = true
             })
+            .disabled(isDisabledNoPeripheral || isDisableWhileRecording  || linechart.isEmpty())
             .buttonStyle(MyButtonStyle())
             .sheet(isPresented: $shareDataModal, content: {
                 let data: [Data] = sortedConnectedPeripheralList.map({$0.getJSONData() ?? Data()})
-                
                 ActivityViewController(activityItems: data)
                 
             })
+            Spacer()
+            //
+            Button("Graph Settings") { showConfig.toggle() }
+                .sheet(isPresented: $showConfig)  {
+                    ConfigGraph(
+                        isPresented: $showConfig,
+                        isLabelsShown: $isLabelsShown,
+                        titleLabel: $chartTitle,
+                        xLabel: $chartXLable,
+                        yLabel: $chartYLable,
+                        linechart: linechart.$linechart
+                    )
+                    
+                }
             
-            Toggle("Labels", isOn: $isLabelsShown)
             
-        }.frame( alignment: .leading)
-            .frame(alignment: .topLeading)
-            .padding()
+        }
+        .frame( alignment: .center)
+        .padding()
+    }
+    
+    var deviceView: some View {
+        
+        HStack {
+            ForEach(sortedConnectedPeripheralList) { peripheral in
+                DeviceLiveCell(peripheral: peripheral, currentState: $recordState)
+                    
+            }
+        }
     }
 }
 

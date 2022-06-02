@@ -12,8 +12,9 @@ import CoreBluetooth
 extension CBPeripheralState {
     
     func toString() -> String {
-        switch self {
         
+        switch self {
+            
         case .disconnected:
             return "Disconnected"
         case .connecting:
@@ -24,6 +25,7 @@ extension CBPeripheralState {
             return "Disconnecting"
         @unknown default:
             return "Unknown State"
+            
         }
     }
     

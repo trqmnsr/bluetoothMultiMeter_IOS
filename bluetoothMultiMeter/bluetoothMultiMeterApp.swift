@@ -13,6 +13,7 @@ struct bluetoothMultiMeterApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView()
+                .modifier(DarkModeViewModifier())
         }
     }
 }

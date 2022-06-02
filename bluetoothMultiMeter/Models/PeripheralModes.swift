@@ -13,84 +13,79 @@ struct PeripheralSetting {
     let units: String
     let maxValue: Double
     let minValue: Double
+    let defaultOn: Bool
     
 }
 
-enum PeripheralMode {
+enum PeripheralMode: CaseIterable, Identifiable {
+    
     case voltDC25
     case amp30
     case res0
-    case unknown
+    
+    var id: Self { self }
     
     func settings() -> PeripheralSetting {
         switch self {
         case .voltDC25:
-            return PeripheralSetting(title: "Volt", units: "VDC", maxValue: 25.0, minValue: 0.0 )
+            return PeripheralSetting(title: "Volt", units: "VDC", maxValue: 25.0, minValue: 0.0, defaultOn: true )
         case .amp30:
-            return PeripheralSetting(title: "Amps", units: "A", maxValue: 30.0, minValue: -30.0)
+            return PeripheralSetting(title: "Current", units: "A", maxValue: 30.0, minValue: -30.0, defaultOn: false)
         case .res0:
-            return PeripheralSetting(title: "Resistance", units: "Ω", maxValue: 1000000000.0, minValue: 0.0)
-        case .unknown:
-            return PeripheralSetting(title: "Unknown", units: "Unit", maxValue: 130.0, minValue: 0.0 )
+            return PeripheralSetting(title: "Resistance", units: "Ω", maxValue: 1000000000.0, minValue: 0.0, defaultOn: false)
         }
     }
     
-    func getMultiplier() -> Double {
-        switch self {
-        case .voltDC25:
-            return 0.001
-        case .amp30:
-            return 0.001
-        case .res0:
-            return 1
-        case .unknown:
-            return 1
-        }
+    
+    mutating func changeMode(_ newMode: PeripheralMode){
+        print("Channging Mode to \(newMode)")
+        self = newMode
     }
     
-    func getCalculatedValue(value: Int16) -> Double {
-        var multiplier : Double = 1.0
-        let val = Double(value)
+    
+    func formatData(_ data: Data) -> Double {
+        var value: Double = Double()
         
-        switch self {
-        case .voltDC25:
-            multiplier = 0.001
-        case .amp30:
-            multiplier =  0.001
-        case .res0:
-            multiplier =  1.0
-        case .unknown:
-            multiplier =  1.0
-        }
+        data.withUnsafeBytes({
+            
+            switch self {
+            case .voltDC25:
+                value = Double( $0.load(as: UInt16.self) ) * 0.001
+            case .amp30:
+                value = Double( $0.load(fromByteOffset: 2, as: Int16.self) ) * 0.001
+            case .res0:
+                value = Double( $0.load(fromByteOffset: 4, as: UInt16.self) )
+            }
+            
+        })
         
-        return multiplier * val
+        
+        return value
     }
     
-    mutating func changeMode(modeIndex: Int){
-        switch modeIndex {
-        case 2:
-            self = .voltDC25
-        case 3:
-            self = .amp30
-        case 4:
-            self = .res0
-        default:
-            self = .unknown
-        }
-    }
+//    mutating func changeMode(modeIndex: Int){
+//        switch modeIndex {
+//        case 2:
+//            self = .voltDC25
+//        case 3:
+//            self = .amp30
+//        case 4:
+//            self = .res0
+//        default:
+//            self = .unknown
+//        }
+//    }
     
-    static func getModeFromInt(modeIndex: Int) -> PeripheralMode{
-        switch modeIndex {
-        case 2:
-            return PeripheralMode.voltDC25
-        case 3:
-            return PeripheralMode.amp30
-        case 4:
-            return PeripheralMode.res0
-        default:
-            return PeripheralMode.unknown
-        }
-    }
+//    static func getModeFromInt(modeIndex: Int) -> PeripheralMode{
+//        switch modeIndex {
+//        case 2:
+//            return PeripheralMode.voltDC25
+//        case 3:
+//            return PeripheralMode.amp30
+//        case 4:
+//            return PeripheralMode.res0
+//        }
+//    }
 }
 
 

@@ -12,13 +12,11 @@ struct LiveDataView: View {
     
     @EnvironmentObject var manager: BluetoothManager
     
+    @Binding var tabSelection: Int
+    
     @State var devicesisExpanded = true
     
     @State var linechart = LineChartElement()
-    
-    @State var datasets = [LineChartDataSet]()
-    
-    @State var mode: PeripheralMode = .unknown
     
     @State var recordState: RecordingState = .standby
     
@@ -30,8 +28,17 @@ struct LiveDataView: View {
     
     @State var isLabelsShown = false
     
-    @State var pickViewDropdown: DropdownOptions = .controlsV
+    @State var pickViewDropdown: GraphViewControlOptions = .controlsView
     
+    @State var chartTitle: String = "Title here!"
+    
+    @State var chartXLable: String = "Time (s)"
+    
+    @State var chartYLable: String = "Value"
+    
+    @State var showConfig: Bool = false
+    
+    @AppStorage("isDarkMode") var isDarkMode: Bool = true
     
     var body: some View {
         
@@ -54,7 +61,7 @@ struct LiveDataView: View {
 
 struct LiveDataView_Previews: PreviewProvider {
     static var previews: some View {
-        LiveDataView()
+        LiveDataView(tabSelection: .constant(0))
             .environmentObject(BluetoothManager())
             .previewInterfaceOrientation(.portrait)
     }

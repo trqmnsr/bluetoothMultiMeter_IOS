@@ -32,6 +32,10 @@ enum RssiSignal {
         }
     }
     
+    mutating func updateRssi(newRssiValue: NSNumber) {
+        self = RssiSignal.getSignalFor(value: newRssiValue)
+    }
+    
     static func getSignalFor(value: NSNumber) -> RssiSignal {
         switch value as! Int {
         case -67 ... 0:
